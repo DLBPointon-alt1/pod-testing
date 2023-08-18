@@ -9,7 +9,7 @@ ports:
 tasks:
   - name: Install Singularity
   # https://docs.sylabs.io/guides/3.0/user-guide/installation.html
-    - command: |
+    command: |
       sudo apt-get update && sudo apt-get install -y \
       build-essential \
       libssl-dev \
@@ -45,7 +45,7 @@ tasks:
       cd
   
   - name: Install Nextflow
-    - command: |
+    command: |
       wget -qO- https://get.nextflow.io | bash
 
       chmod +x nextflow
@@ -55,13 +55,13 @@ tasks:
       cd
 
   - name: Install Python3.10
-    - command: |
+    command: |
       apt-get install python3
 
       cd
 
   - name: Install JBrowse2
-    - command: |
+    command: |
       npm install -g @jbrowse/cli
 
       jbrowse create jbrowse2
