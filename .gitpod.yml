@@ -30,7 +30,7 @@ tasks:
       make -C ./builddir && \
       sudo make -C ./builddir install
 
-      cd
+      cd /workspace/pod-testing/
   
   - name: Install Nextflow
     command: |
@@ -40,7 +40,7 @@ tasks:
 
       nextflow self-update
 
-      cd
+      cd /workspace/pod-testing/
 
   - name: Install JBrowse2
     command: |
@@ -52,8 +52,16 @@ tasks:
 
       npx serve .
 
-      cd
+      cd /workspace/pod-testing/
 
+  - name: Install TreeVal Pipeline
+    command: |
+    # git clone https://github.com/sanger-tol/treeval.git
+    git clone -b pre-tag https://github.com/sanger-tol/treeval.git
+
+  - name: Install Curtation Pretext
+    command: |
+    git clone -b dev https://github.com/sanger-tol/curationpretext.git
 
 vscode:
   extensions: # based on nf-core.nf-core-extensionpack
