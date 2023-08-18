@@ -62,6 +62,10 @@ tasks:
     command: |
       git clone -b dev https://github.com/sanger-tol/curationpretext.git
 
+  - name: Alias Nextflow
+    command: |
+      echo "alias nextflow_cmd='/workspace/pod-testing/nextflow'" >> ~/.bashrc
+
 vscode:
   extensions: # based on nf-core.nf-core-extensionpack
     - codezombiech.gitignore # Language support for .gitignore files
