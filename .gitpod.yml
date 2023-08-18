@@ -7,7 +7,7 @@ ports:
   visibility: public
 
 tasks:
-  - name: Install Singularity
+  - name: Install Singularity 3.11.4
   # https://docs.sylabs.io/guides/3.0/user-guide/installation.html
     command: |
       sudo apt-get update && sudo apt-get install -y \
@@ -19,10 +19,9 @@ tasks:
       libseccomp-dev \
       pkg-config
 
-      export VERSION=3.0.3 && \
       mkdir -p $GOPATH/src/github.com/sylabs && \
       cd $GOPATH/src/github.com/sylabs && \
-      wget https://github.com/sylabs/singularity/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz && \
+      wget https://github.com/sylabs/singularity/releases/download/v3.11.4/singularity-ce-3.11.4.tar.gz && \
       tar -xzf singularity-${VERSION}.tar.gz && \
       cd ./singularity && \
       ./mconfig
@@ -40,12 +39,6 @@ tasks:
       chmod +x nextflow
 
       nextflow self-update
-
-      cd
-
-  - name: Install Python3.10
-    command: |
-      apt-get install python3
 
       cd
 
