@@ -56,12 +56,11 @@ tasks:
 
   - name: Install TreeVal Pipeline
     command: |
-    # git clone https://github.com/sanger-tol/treeval.git
-    git clone -b pre-tag https://github.com/sanger-tol/treeval.git
+      git clone -b pre-tag https://github.com/sanger-tol/treeval.git
 
   - name: Install Curtation Pretext
     command: |
-    git clone -b dev https://github.com/sanger-tol/curationpretext.git
+      git clone -b dev https://github.com/sanger-tol/curationpretext.git
 
 vscode:
   extensions: # based on nf-core.nf-core-extensionpack
