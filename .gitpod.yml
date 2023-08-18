@@ -4,6 +4,7 @@ ports:
 - name: JBrowseWeb
   description: The JBrowse Webserver port
   port: 3000
+  onOpen: open-browser
   visibility: public
 
 tasks:
