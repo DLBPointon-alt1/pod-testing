@@ -34,6 +34,7 @@ tasks:
       cd /workspace/pod-testing/
   
   - name: Install Nextflow
+  # https://www.nextflow.io/docs/latest/getstarted.html
     command: |
       wget -qO- https://get.nextflow.io | bash
 
@@ -44,6 +45,7 @@ tasks:
       cd /workspace/pod-testing/
 
   - name: Install JBrowse2
+  # https://jbrowse.org/jb2/download/#jbrowse-cli-tools
     command: |
       npm install -g @jbrowse/cli
 
@@ -56,10 +58,12 @@ tasks:
       cd /workspace/pod-testing/
 
   - name: Install TreeVal Pipeline
+  # https://github.com/sanger-tol/treeval
     command: |
       git clone -b pre-tag https://github.com/sanger-tol/treeval.git
 
   - name: Install Curtation Pretext
+  # https://github.com/sanger-tol/curationpretext
     command: |
       git clone -b dev https://github.com/sanger-tol/curationpretext.git
 
