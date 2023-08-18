@@ -1,0 +1,87 @@
+image: gitpod/workspace-full-vnc
+
+ports:
+- name: JBrowseWeb
+  description: The JBrowse Webserver port
+  port: 3000
+  visibility: public
+
+tasks:
+  - name: Install Singularity
+  # https://docs.sylabs.io/guides/3.0/user-guide/installation.html
+    - command: |
+      sudo apt-get update && sudo apt-get install -y \
+      build-essential \
+      libssl-dev \
+      uuid-dev \
+      libgpgme11-dev \
+      squashfs-tools \
+      libseccomp-dev \
+      pkg-config
+
+      export VERSION=1.11 OS=linux ARCH=amd64 && \
+      wget https://dl.google.com/go/go$VERSION.$OS-$ARCH.tar.gz && \
+      sudo tar -C /usr/local -xzvf go$VERSION.$OS-$ARCH.tar.gz && \
+      rm go$VERSION.$OS-$ARCH.tar.gz
+
+      echo 'export GOPATH=${HOME}/go' >> ~/.bashrc && \
+      echo 'export PATH=/usr/local/go/bin:${PATH}:${GOPATH}/bin' >> ~/.bashrc && \
+      source ~/.bashrc
+
+      go get -u github.com/golang/dep/cmd/dep
+
+      export VERSION=3.0.3 && # adjust this as necessary \
+      mkdir -p $GOPATH/src/github.com/sylabs && \
+      cd $GOPATH/src/github.com/sylabs && \
+      wget https://github.com/sylabs/singularity/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz && \
+      tar -xzf singularity-${VERSION}.tar.gz && \
+      cd ./singularity && \
+      ./mconfig
+
+      ./mconfig && \
+      make -C ./builddir && \
+      sudo make -C ./builddir install
+
+      cd
+  
+  - name: Install Nextflow
+    - command: |
+      wget -qO- https://get.nextflow.io | bash
+
+      chmod +x nextflow
+
+      nextflow self-update
+
+      cd
+
+  - name: Install Python3.10
+    - command: |
+      apt-get install python3
+
+      cd
+
+  - name: Install JBrowse2
+    - command: |
+      npm install -g @jbrowse/cli
+
+      jbrowse create jbrowse2
+
+      cd jbrowse2/
+
+      npx serve .
+
+      cd
+
+
+vscode:
+  extensions: # based on nf-core.nf-core-extensionpack
+    - codezombiech.gitignore # Language support for .gitignore files
+    # - cssho.vscode-svgviewer               # SVG viewer
+    - esbenp.prettier-vscode # Markdown/CommonMark linting and style checking for Visual Studio Code
+    - eamodio.gitlens # Quickly glimpse into whom, why, and when a line or code block was changed
+    - EditorConfig.EditorConfig # override user/workspace settings with settings found in .editorconfig files
+    - Gruntfuggly.todo-tree # Display TODO and FIXME in a tree view in the activity bar
+    - mechatroner.rainbow-csv # Highlight columns in csv files in different colors
+    # - nextflow.nextflow                    # Nextflow syntax highlighting
+    - oderwat.indent-rainbow # Highlight indentation level
+    - streetsidesoftware.code-spell-checker # Spelling checker for source code
