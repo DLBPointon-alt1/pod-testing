@@ -67,6 +67,8 @@ tasks:
     command: |
       echo "alias nextflow_cmd='/workspace/pod-testing/nextflow'" >> ~/.bashrc
 
+      source ~/.bashrc
+
 vscode:
   extensions: # based on nf-core.nf-core-extensionpack
     - codezombiech.gitignore # Language support for .gitignore files
