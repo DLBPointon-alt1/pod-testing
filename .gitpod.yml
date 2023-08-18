@@ -53,7 +53,7 @@ tasks:
 
       cd jbrowse2/
 
-      npx serve .
+      npx serve . -l 3000
 
       cd /workspace/pod-testing/
 
