@@ -24,7 +24,7 @@ tasks:
       cd $GOPATH/src/github.com/sylabs && \
       wget https://github.com/sylabs/singularity/releases/download/v3.11.4/singularity-ce-3.11.4.tar.gz && \
       tar -xzf singularity-ce-3.11.4.tar.gz && \
-      cd ./singularity && \
+      cd ./singularity-ce-3.11.4 && \
       ./mconfig
 
       ./mconfig && \
