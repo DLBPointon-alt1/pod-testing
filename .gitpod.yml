@@ -7,6 +7,12 @@ ports:
   onOpen: open-browser
   visibility: public
 
+- name: HiGlass
+  description: The HiGlass port
+  port: 8989
+  onOpen: open-browser
+  visibility: public
+
 tasks:
   - name: Install Singularity 3.11.4
   # https://docs.sylabs.io/guides/3.0/user-guide/installation.html
@@ -66,6 +72,27 @@ tasks:
   # https://github.com/sanger-tol/curationpretext
     command: |
       git clone -b dev https://github.com/sanger-tol/curationpretext.git
+
+  - name: Install HiGlass
+  # https://docs.higlass.io/tutorial.html
+    command: |
+      pip install higlass-manage
+
+      higlass-manage start
+
+      higlass-manage ingest /workspace/pod-testing/ilTorViri5-BGA/hic_files/ilTolViri5_1.mcool --project-name TreeVal --assembly ilTorViri
+
+ # higlass-manage ingest --filetype  chromsizes-tsv --filename /workspace/pod-testing/ilTorViri5-BGA/treeval_upload/ilTolViri5_1.genome --project-name TreeVal --datatype chromsizes --coordSystem  ilTolViri5_assembly
+
+ # clodius aggregate bedfile --chromsizes-filename /workspace/pod-testing/ilTorViri5-BGA/treeval_upload/ilTolViri5_1.genome /workspace/pod-testing/ilTorViri5-BGA/hic_files/ilTolViri5_1_telomere.bed
+
+ # higlass-manage ingest /workspace/pod-testing/ilTorViri5-BGA/hic_files/ilTolViri5_1_telomere.bed --filetype bedfile --datatype bedlike --project-name TreeVal --assembly ilTorViri --chromsizes-filename /workspace/pod-testing/ilTorViri5-BGA/treeval_upload/ilTolViri5_1.genome 
+
+ # higlass-manage ingest /workspace/pod-testing/ilTorViri5-BGA/hic_files/ilTolViri5_1_gap.bed  --filetype bedfile --datatype bedlike --project-name TreeVal --assembly ilTorViri --chromsizes-filename /workspace/pod-testing/ilTorViri5-BGA/treeval_upload/ilTolViri5_1.genome 
+
+ # higlass-manage ingest /workspace/pod-testing/ilTorViri5-BGA/hic_files/ilTolViri5_1_repeat_density.bigWig --project-name TreeVal --assembly ilTorViri --chromsizes-filename /workspace/pod-testing/ilTorViri5-BGA/treeval_upload/ilTolViri5_1.genome 
+
+ # higlass-manage ingest /workspace/pod-testing/ilTorViri5-BGA/hic_files/ilTolViri5_1_coverage.bigWig --project-name TreeVal --assembly ilTorViri --chromsizes-filename /workspace/pod-testing/ilTorViri5-BGA/treeval_upload/ilTolViri5_1.genome 
 
   - name: Alias Nextflow
     command: |
