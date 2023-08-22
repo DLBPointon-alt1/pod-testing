@@ -73,6 +73,26 @@ tasks:
 
       source ~/.bashrc
 
+  - name: Download busco for nematode
+    command: |
+      curl https://dp24.cog.sanger.ac.uk/Busco.tar.gz | tar xzf -
+
+  - name: Download Nematode Test data and make synteny
+    command: |
+      curl https://dp24.cog.sanger.ac.uk/Nematode.tar.gz | tar xzf -
+
+      mkdir -p /workspace/pod-testing/synteny/nematode/
+
+      cp /workspace/pod-testing/Oscheius_DF5033/genomic_data/Oscheius_DF5033.fa /workspace/pod-testing/synteny/nematode/SuperNematode.fa
+
+  - name: Download Lepidoptera data
+    command: |
+      curl https://dp24.cog.sanger.ac.uk/ilTorViri5.tar.gz | tar xzf -
+
+  - name: Download Genomic Alignment data
+    command: |
+      curl https://dp24.cog.sanger.ac.uk/AlignmentData.tar.gz | tar xzf -  
+
 vscode:
   extensions:                               # based on nf-core.nf-core-extensionpack
     - codezombiech.gitignore                # Language support for .gitignore files
